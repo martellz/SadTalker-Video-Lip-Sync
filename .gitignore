@@ -1,0 +1,7 @@
+*/__pycache__/
+*.pth
+*.pyc
+*.tar
+*.dat
+checkpoints/*/
+results/*/
