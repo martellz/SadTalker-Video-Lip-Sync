@@ -18,7 +18,10 @@ def main(args):
     pic_path = args.source_video
     audio_path = args.driven_audio
     enhancer_region = args.enhancer
-    save_dir = os.path.join(args.result_dir, strftime("%Y_%m_%d_%H.%M.%S"))
+    if args.save_dir is None:
+        save_dir = os.path.join(args.result_dir, strftime("%Y_%m_%d_%H.%M.%S"))
+    else:
+        save_dir = args.save_dir
     os.makedirs(save_dir, exist_ok=True)
     device = args.device
     batch_size = args.batch_size
@@ -99,6 +102,7 @@ if __name__ == '__main__':
                         help="path to source video")
     parser.add_argument("--checkpoint_dir", default='./checkpoints', help="path to output")
     parser.add_argument("--result_dir", default='./results', help="path to output")
+    parser.add_argument("--save_dir", default=None, help="path to existing output to use landmarks results")
     parser.add_argument("--batch_size", type=int, default=1, help="the batch size of facerender")
     parser.add_argument("--enhancer", type=str, default='lip', help="enhaner region:[none,lip,face] \
                                                                       none:do not enhance; \
